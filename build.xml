@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE project>
+<project name="generate-server" default="main" >
+    <property name="javahome" 
+        value="C:\Program Files (x86)\Java\jdk1.7.0" />
+   <!--  <property name="wsdl.location" 
+        value="src/main/webapp/WEB-INF/apollopharmacy.wsdl" /> -->
+    
+  <!--   <target name="xxx">
+        <exec executable="${javahome}\bin\wsgen.exe">
+            <arg line="${wsdl.location} -s src/main/java -Xdebug -verbose -Xnocompile" />
+        </exec>
+    </target> -->
+	<property name="class-dir" value="target/classes"/>
+	<!-- <property name="wsgen-outdir" value="src/main/java"/> -->
+	<property name="wsdl-outdir" value="src/main/webapp/WEB-INF/wsdl"/>
+	<property name="src-outdir" value="src/main/java"/>
+	
+	<target name="main" depends="create-wsdl-outdir">
+	    <exec executable="${javahome}\bin\wsgen.exe">
+	        <arg value="-verbose" />
+	        <!-- Set the classpath. -->
+	        <arg value="-cp" />
+	        <arg value="${class-dir}" />
+	        <!-- Generate a WSDL file. -->
+	        <arg value="-wsdl" />
+	        <!-- Specify where to write other generated files. 
+	        <arg value="-d" />
+	        <arg value="${wsgen-outdir}" />-->
+	        <!-- Specify where to write WSDL and XML schema files. -->
+	        <arg value="-r" />
+	        <arg value="${wsdl-outdir}" />
+	        <!-- Specify where to write generated source files. -->
+	        <arg value="-s" />
+	        <arg value="${src-outdir}" />
+	        <!-- Keep generated source files. -->
+	        <arg value="-keep" />
+	        <!-- Specify service endpoint interface/class. -->
+	        <arg value="com.java.opts.TicketMgrServiceImpl" />
+	    </exec>
+	</target>
+	
+	<!-- <target name="create-class-dir">
+		<mkdir dir="${class-dir}"/>
+	</target> -->
+	<!-- 
+	<target name="create-wsgen-outdir">
+			<mkdir dir="${wsgen-outdir}"/>
+		</target> -->
+	
+	<target name="create-wsdl-outdir">
+				<mkdir dir="${wsdl-outdir}"/>
+			</target>
+	
+	
+	
+</project>
